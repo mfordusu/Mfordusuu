@@ -1,0 +1,111 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({IntroText = "Mf Hub",Name = "Cathe Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "Welcome Mf Hub"})
+
+
+_G.AutoFarm = false
+
+function AutoFarm()
+    while _G.AutoFarm == true do 
+       local tp_table = {
+            tp3 = Vector3.new(-540, -4, -30300),
+            tp1 = Vector3.new(-540, -4, -150),
+        }
+        
+        local tween_s = game:GetService('TweenService')
+        local tweeninfo = TweenInfo.new(4,Enum.EasingStyle.Linear)
+        
+        local lp = game.Players.LocalPlayer
+        
+        function tween_tp(v)
+            if lp.Character and 
+            lp.Character:FindFirstChild('HumanoidRootPart') then
+                local cf = CFrame.new(v)
+                local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+                a:Play()
+                 a.Completed:Wait()
+            end
+        end
+        
+        tween_tp(tp_table.tp1)
+wait(0.2)
+        tween_tp(tp_table.tp3)
+wait(3)
+end
+end
+
+local FarmTab = Window:MakeTab({
+	Name = "Farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+PlayerTab:AddTextbox({
+	Name = "Name Changer",
+	Default = "Write Name",
+	TextDisappear = false,
+	Callback = function(Value)
+-- credits to 07granddad for making this
+while game:IsLoaded() == false do wait() end
+local fakeplr = {["Name"] = (Value), ["UserId"] = "3742966445"}
+local lplr = game:GetService("Players").LocalPlayer
+
+local function plrthing(obj, property)
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        if v ~= lplr then
+        else
+            obj[property] = obj[property]:gsub(v.Name, fakeplr["Name"])
+            obj[property] = obj[property]:gsub(v.DisplayName, fakeplr["Name"])
+            obj[property] = obj[property]:gsub(v.UserId, fakeplr["UserId"])
+        end
+    end
+end
+
+local function newobj(v)
+    if v:IsA("TextLabel") or v:IsA("TextButton") then
+        plrthing(v, "Text")
+        v:GetPropertyChangedSignal("Text"):connect(function()
+            plrthing(v, "Text")
+        end)
+    end
+    if v:IsA("ImageLabel") then
+        plrthing(v, "Image")
+        v:GetPropertyChangedSignal("Image"):connect(function()
+            plrthing(v, "Image")
+        end)
+    end
+end
+
+for i,v in pairs(game:GetDescendants()) do
+    newobj(v)
+end
+game.DescendantAdded:connect(newobj)
+end	
+})
+
+FarmTab:AddToggle({
+	Name = "AutoFarm",
+	Default = false,
+	Callback = function(Value)
+_G.AutoFarm = Value 
+AutoFarm() 
+    end
+})
+
+local CreditsTab = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+CreditsTab:AddParagraph("Thank you so much","Made by Cips#1508")
+CreditsTab:AddParagraph("Discord invite","https://discord.gg/zzxF82DHpX")
+
+OrionLib:Init()
+
+task.wait(1)

@@ -1,0 +1,128 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({IntroText = "Hi",Name = "Skala simulator Script by Cips#1508", HidePremium = false, SaveConfig = true, ConfigFolder = "speedy is sus"})
+
+--Value lar
+_G.AutoClick = false
+_G.AutoUprade = false
+_G.AutoTurtle = false
+_G.AutoTurtle2 = false
+_G.AutoTurtle3 = false
+_G.AutoMegaClick = false
+
+
+--function lar
+function AutoClick()
+    while _G.AutoClick == true do
+game:GetService("ReplicatedStorage").Click:FireServer()
+game:GetService("ReplicatedStorage").Click:FireServer()
+game:GetService("ReplicatedStorage").Click:FireServer()
+game:GetService("ReplicatedStorage").Click:FireServer()
+game:GetService("ReplicatedStorage").Click:FireServer()
+game:GetService("ReplicatedStorage").Click:FireServer()
+game:GetService("ReplicatedStorage").Click:FireServer()
+wait()
+end
+end
+function AutoTurtle()
+    while _G.AutoTurtle == true do
+local ohNumber1 = 1
+local ohNumber2 = 1
+
+game:GetService("ReplicatedStorage").IncomeEvent:FireServer(ohNumber1, ohNumber2)
+wait()
+end
+end
+function AutoTurtle2()
+    while _G.AutoTurtle2 == true do
+local ohNumber1 = 2
+local ohNumber2 = 1
+
+game:GetService("ReplicatedStorage").IncomeEvent:FireServer(ohNumber1, ohNumber2)
+wait()
+end
+end
+function AutoTurtle3()
+    while _G.AutoTurtle3 == true do
+local ohNumber1 = 3
+local ohNumber2 = 1
+
+game:GetService("ReplicatedStorage").IncomeEvent:FireServer(ohNumber1, ohNumber2)
+wait()
+end
+end
+function AutoMegaClick()
+    while _G.AutoMegaClick == true do
+game:GetService("ReplicatedStorage").MegaClick:FireServer()
+wait(1)
+end
+end
+--function auto
+function AutoUprade()
+    while _G.AutoUprade == true do
+local ohInstance1 = game:GetService("Players").LocalPlayer.PlayerGui.GameGui.Upgrade
+
+game:GetService("ReplicatedStorage").ClickUpgrade:InvokeServer(ohInstance1)
+wait()
+    end
+end        
+
+--menü
+local FarmTab = Window:MakeTab({
+	Name = "Farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+--buton
+FarmTab:AddToggle({
+	Name = "AutoClick",
+	Default = false,
+	Callback = function(Value)
+_G.AutoClick = Value 
+AutoClick() 
+    end
+})
+FarmTab:AddToggle({
+	Name = "AutoTurtle",
+	Default = false,
+	Callback = function(Value)
+_G.AutoTurtle = Value 
+AutoTurtle() 
+    end
+})
+FarmTab:AddToggle({
+	Name = "AutoTurtle2",
+	Default = false,
+	Callback = function(Value)
+_G.AutoTurtle2 = Value 
+AutoTurtle2() 
+    end
+})
+FarmTab:AddToggle({
+	Name = "AutoTurtle3",
+	Default = false,
+	Callback = function(Value)
+_G.AutoTurtle3 = Value 
+AutoTurtle3() 
+    end
+})
+FarmTab:AddToggle({
+	Name = "AutoMegaClick",
+	Default = false,
+	Callback = function(Value)
+_G.AutoMegaClick = Value 
+AutoMegaClick() 
+    end
+})
+
+FarmTab:AddToggle({
+	Name = "AutoUprade",
+	Default = false,
+	Callback = function(Value)
+_G.AutoUprade = Value 
+AutoUprade() 
+    end
+})
+
+OrionLib:Init()
+
+task.wait(2)

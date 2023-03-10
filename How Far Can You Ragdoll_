@@ -1,0 +1,140 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({IntroText = "Mf Hub",Name = "Cathe Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "Welcome Mf Hub"})
+
+--Value lar
+_G.AutoClick = false
+
+--function lar
+function AutoClick()
+    while _G.AutoClick == true do
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.CurrencyService.RF.BuySpeed:InvokeServer()
+game:GetService("ReplicatedStorage").KnitPackages.Knit.Services.RebirthService.RF.RequestRebirth:InvokeServer()
+wait()
+end
+end
+--function auto
+
+--menü
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+PlayerTab:AddTextbox({
+	Name = "Name Changer",
+	Default = "Write Name",
+	TextDisappear = false,
+	Callback = function(Value)
+-- credits to 07granddad for making this
+while game:IsLoaded() == false do wait() end
+local fakeplr = {["Name"] = (Value), ["UserId"] = "3742966445"}
+local lplr = game:GetService("Players").LocalPlayer
+
+local function plrthing(obj, property)
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        if v ~= lplr then
+        else
+            obj[property] = obj[property]:gsub(v.Name, fakeplr["Name"])
+            obj[property] = obj[property]:gsub(v.DisplayName, fakeplr["Name"])
+            obj[property] = obj[property]:gsub(v.UserId, fakeplr["UserId"])
+        end
+    end
+end
+
+local function newobj(v)
+    if v:IsA("TextLabel") or v:IsA("TextButton") then
+        plrthing(v, "Text")
+        v:GetPropertyChangedSignal("Text"):connect(function()
+            plrthing(v, "Text")
+        end)
+    end
+    if v:IsA("ImageLabel") then
+        plrthing(v, "Image")
+        v:GetPropertyChangedSignal("Image"):connect(function()
+            plrthing(v, "Image")
+        end)
+    end
+end
+
+for i,v in pairs(game:GetDescendants()) do
+    newobj(v)
+end
+game.DescendantAdded:connect(newobj)
+end	
+})
+
+
+local FarmTab = Window:MakeTab({
+	Name = "Farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+FarmTab:AddTextbox({
+	Name = "AutoClicker ( Real Click )",
+	Default = "AutoCicker toggle keybind (type)",
+	TextDisappear = false,
+	Callback = function(Value)
+local time = 0.05 --decrease if too slow increase if too fast
+
+click = false
+m = game.Players.LocalPlayer:GetMouse()
+m.KeyDown:connect(function(key)
+if key == (Value) then
+if click == true then click = false
+elseif
+click == false then click = true
+
+while click == true do 
+wait(time)
+mouse1click()
+end
+end
+end
+end)
+end	
+})
+--buton
+FarmTab:AddToggle({
+	Name = "Auto Rebirth",
+	Default = false,
+	Callback = function(Value)
+_G.AutoClick = Value 
+AutoClick() 
+    end
+})
+FarmTab:AddButton({
+	Name = "Always give speed",
+	Callback = function()
+game:GetService("Workspace").GiveSpeed.Size = Vector3.new(100, 100, 100) 
+  	end    
+})
+game:GetService("RunService").RenderStepped:Connect(function()
+    pcall(function()
+        if game.Players.LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
+            game.Players.LocalPlayer.Character:TranslateBy(game.Players.LocalPlayer.Character.Humanoid.MoveDirection * TargetWalkspeed/50)
+        end
+    end)
+end)
+FarmTab:AddSlider({
+	Name = "Speed",
+	Min = 0,
+	Max = 13000,
+	Default = 0,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	Callback = function(Value)
+		TargetWalkspeed = Value
+	end    
+})
+OrionLib:Init()
+
+task.wait(2)
