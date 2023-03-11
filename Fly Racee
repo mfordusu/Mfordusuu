@@ -1,0 +1,220 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({IntroText = "Mf Hub",Name = "Mf Hub / script by AAspect#0001", HidePremium = false, SaveConfig = true, ConfigFolder = "Welcome Mf Hub Sus"})
+
+_G.AutoFarm2 = false
+_G.AutoFarm = false
+_G.AutoFarm3 = false
+
+
+function AutoFarm()
+    while _G.AutoFarm == true do 
+       local tp_table = {
+            tp1 = Vector3.new(350, 100, -800),
+            tp3 = Vector3.new(230000402.1016, 2800.942566, -836.438965, 1, 1.51065606e-07, 4.12622952e-14, -1.51065606e-07, 1, 6.02517289e-08, -3.21603299e-14, -6.02517289e-08, 1),
+        }
+        
+        local tween_s = game:GetService('TweenService')
+        local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
+        
+        local lp = game.Players.LocalPlayer
+        
+        function tween_tp(v)
+            if lp.Character and 
+            lp.Character:FindFirstChild('HumanoidRootPart') then
+                local cf = CFrame.new(v)
+                local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+                a:Play()
+                 a.Completed:Wait()
+            end
+        end
+        
+        tween_tp(tp_table.tp1)
+    while _G.AutoFarm == true do
+        tween_tp(tp_table.tp3)
+end
+end
+end
+function AutoFarm2()
+    while _G.AutoFarm2 == true do 
+       local tp_table = {
+            tp4 = Vector3.new(350, 100, -128923.43),
+            tp5 = Vector3.new(999999999999999999999999999999999999, 100, -1836.438965),
+        }
+        
+        local tween_s = game:GetService('TweenService')
+        local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
+        
+        local lp = game.Players.LocalPlayer
+        
+        function tween_tp(v)
+            if lp.Character and 
+            lp.Character:FindFirstChild('HumanoidRootPart') then
+                local cf = CFrame.new(v)
+                local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+                a:Play()
+                 a.Completed:Wait()
+            end
+        end
+        
+        tween_tp(tp_table.tp4)
+    while _G.AutoFarm2 == true do 
+        tween_tp(tp_table.tp5)
+end
+end
+end
+function AutoFarm3()
+    while _G.AutoFarm3 == true do 
+       local tp_table = {
+            tp6 = Vector3.new(350, 100, 104726),
+            tp7 = Vector3.new(999999999999999999999999999999999999, 100, 104726.945, 0.86109525, -3.57240886e-08, -0.508443713, 2.51322358e-08, 1, -2.76979346e-08, 0.508443713, 1.10722329e-08, 0.86109525),
+        }
+        
+        local tween_s = game:GetService('TweenService')
+        local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
+        
+        local lp = game.Players.LocalPlayer
+        
+        function tween_tp(v)
+            if lp.Character and 
+            lp.Character:FindFirstChild('HumanoidRootPart') then
+                local cf = CFrame.new(v)
+                local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+                a:Play()
+                 a.Completed:Wait()
+            end
+        end
+        
+        tween_tp(tp_table.tp6)
+    while _G.AutoFarm3 == true do
+        tween_tp(tp_table.tp7)
+end
+end
+end
+local FarmTab = Window:MakeTab({
+	Name = "Farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+PlayerTab:AddTextbox({
+	Name = "Name Changer",
+	Default = "Write Name",
+	TextDisappear = false,
+	Callback = function(Value)
+-- credits to 07granddad for making this
+while game:IsLoaded() == false do wait() end
+local fakeplr = {["Name"] = (Value), ["UserId"] = "3742966445"}
+local lplr = game:GetService("Players").LocalPlayer
+
+local function plrthing(obj, property)
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        if v ~= lplr then
+        else
+            obj[property] = obj[property]:gsub(v.Name, fakeplr["Name"])
+            obj[property] = obj[property]:gsub(v.DisplayName, fakeplr["Name"])
+            obj[property] = obj[property]:gsub(v.UserId, fakeplr["UserId"])
+        end
+    end
+end
+
+local function newobj(v)
+    if v:IsA("TextLabel") or v:IsA("TextButton") then
+        plrthing(v, "Text")
+        v:GetPropertyChangedSignal("Text"):connect(function()
+            plrthing(v, "Text")
+        end)
+    end
+    if v:IsA("ImageLabel") then
+        plrthing(v, "Image")
+        v:GetPropertyChangedSignal("Image"):connect(function()
+            plrthing(v, "Image")
+        end)
+    end
+end
+
+for i,v in pairs(game:GetDescendants()) do
+    newobj(v)
+end
+game.DescendantAdded:connect(newobj)
+end	
+})
+
+FarmTab:AddToggle({
+	Name = "AutoFarm Earth World",
+	Default = false,
+	Callback = function(Value)
+_G.AutoFarm = Value 
+AutoFarm() 
+    end
+})
+FarmTab:AddToggle({
+	Name = "AutoFarm Space World",
+	Default = false,
+	Callback = function(Value)
+_G.AutoFarm2 = Value 
+AutoFarm2() 
+    end
+})
+FarmTab:AddToggle({
+	Name = "AutoFarm Paradise World",
+	Default = false,
+	Callback = function(Value)
+_G.AutoFarm3 = Value 
+AutoFarm3() 
+    end
+})
+local CreditsTab = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+PlayerTab:AddButton({
+	Name = "Anti Fall",
+	Callback = function()
+Float_Height = "100"
+
+local i=1
+G=game;
+_=wait;
+p=G:GetService("Players").LocalPlayer.Character
+p:FindFirstChild("Humanoid").HipHeight = Float_Height
+_(1.5);
+t=.4;
+n=2;
+for i=1,i do
+repeat p:FindFirstChild("Humanoid").HipHeight=Float_Height-n _(t)p:FindFirstChild("Humanoid").HipHeight=Float_Height+n _(t) until
+p:FindFirstChild("Humanoid").Health == 0
+end
+ 	end    
+})
+PlayerTab:AddButton({
+	Name = "Close AntiFall",
+	Callback = function()
+Float_Height = "0"
+
+local i=1
+G=game;
+_=wait;
+p=G:GetService("Players").LocalPlayer.Character
+p:FindFirstChild("Humanoid").HipHeight = Float_Height
+_(1.5);
+t=.4;
+n=2;
+for i=1,i do
+repeat p:FindFirstChild("Humanoid").HipHeight=Float_Height-n _(t)p:FindFirstChild("Humanoid").HipHeight=Float_Height+n _(t) until
+p:FindFirstChild("Humanoid").Health == 0
+end
+ 	end    
+})
+CreditsTab:AddParagraph("Thank you so much","Made by Cips#0001")
+CreditsTab:AddParagraph("Discord invite","https://discord.gg/zzxF82DHpX")
+
+OrionLib:Init()
+
+task.wait(1)
